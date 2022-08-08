@@ -13,6 +13,10 @@ import {routes} from './routes';
 import User from './Helpers/User';
 window.User = User;
 
+//import user Class
+import Notification from './Helpers/Notification';
+window.Notification = Notification;
+
 //Sweet Alert
 import Swal from 'sweetalert2'
 window.Swal = Swal;
