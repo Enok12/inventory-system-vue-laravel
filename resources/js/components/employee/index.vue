@@ -3,7 +3,9 @@
         <div class="row">
             <router-link to="store-employee" class="btn btn-primary">Add Employee</router-link>
         </div>
-        <br><br>
+        <br>
+        <input type="text" class="form-control" v-model="searchTerm" style="width:300px;" placeholder="search">
+        <br>
         
  <div class="row">
             <div class="col-lg-12 mb-4">
@@ -11,6 +13,9 @@
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
+                </div>
+                <div class="alert alert-danger" v-cloak v-if="filtersearch.length === 0">
+                  No Data Found
                 </div>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
@@ -26,7 +31,7 @@
                     </thead>
                     <tbody>
                       
-                      <tr v-for="employee in employees" :key="employee.id">
+                      <tr v-for="employee in filtersearch" :key="employee.id">
                         <td>{{employee.name}}</td>
                         <td><img :src="employee.photo" alt="" id="em_photo"></td>
                         <td>{{employee.phone}}</td>
@@ -62,7 +67,17 @@ created(){
 },
 data(){
   return {
-    employees:[]
+    employees:[],
+    searchTerm:''
+  }
+},
+
+computed:{
+  //Search
+  filtersearch(){
+    return this.employees.filter(employee => {
+      return employee.phone.match(this.searchTerm)
+    })
   }
 },
 methods:{
