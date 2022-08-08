@@ -37,7 +37,8 @@
                         <td>{{employee.phone}}</td>
                         <td>{{employee.salary}}</td>
                         <td>{{employee.joining_date}}</td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a>
+                        <td>   <router-link :to="{name: 'edit-employee', params:{id:employee.id}}" class="btn btn-sm btn-primary">Edit</router-link>
+
                         <a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                       </tr>
