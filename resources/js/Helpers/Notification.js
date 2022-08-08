@@ -37,6 +37,15 @@ class Notification{
          }).show();
     }
 
+    image_validation(){
+        new Noty({
+            type:'error',
+            layout:'topRight',
+             text: 'upload Image less than 1MB',
+             timeout:1000,
+         }).show();
+    }
+
    
 
   

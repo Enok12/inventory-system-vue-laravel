@@ -6,6 +6,8 @@ let logout = require('./components/auth/logout.vue').default;
 
 //EMPLOYEE COMPONENTS
 let storeemployee = require('./components/employee/create.vue').default;
+let employee = require('./components/employee/index.vue').default;
+
 
 
 
@@ -21,5 +23,7 @@ export const routes = [
 
     //Employee Module
     { path: '/store-employee', component: storeemployee,name:'store-employee' },
+    { path: '/employee', component: employee,name:'employee' },
+
 
   ]

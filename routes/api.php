@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\EmployeeController;
+
+
 Route::group([
 
     'middleware' => 'api',
@@ -15,3 +18,5 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+
+Route::apiResource('/employeee', EmployeeController::class);
