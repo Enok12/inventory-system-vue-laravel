@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Model\Supplier;
+use Image;
 
 class SupplierController extends Controller
 {
@@ -14,7 +16,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $supplier = Supplier::all();
+        return response()->json($supplier);
     }
 
     /**
@@ -35,7 +38,43 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedata = $request->validate([
+            'name' => 'required|unique:suppliers|max:255',
+            'email' => 'required',
+            'phone' => 'required|unique:suppliers',
+        ]);
+
+       
+        if($request->photo){
+            $position = strpos($request->photo,';');
+            $sub = substr($request->photo,0,$position);
+            $exi = explode('/',$sub)[1];
+
+            $name = time().".".$exi;
+            $image = Image::make($request->photo)->resize(240,200);
+            $upload_path = 'backend/supplier/';
+            $img_url = $upload_path.$name;
+            $image->save($img_url);
+
+            $supplier = new Supplier;
+
+            $supplier->name = $request->name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->shopname = $request->shopname;
+            $supplier->address = $request->address;
+            $supplier->photo =  $img_url;
+            $supplier->save();
+         }else{
+            $supplier = new supplier();
+
+            $supplier->name = $request->name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->shopname = $request->shopname;
+            $supplier->address = $request->address;
+            $supplier->save();
+         }
     }
 
     /**
