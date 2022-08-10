@@ -29,9 +29,9 @@
                       
                       <tr v-for="category in filtersearch" :key="category.id">
                         <td>{{category.category_name}}</td>
-                        <td>   <router-link :to="{name: 'edit-supplier', params:{id:category.id}}" class="btn btn-sm btn-primary">Edit</router-link>
+                        <td>   <router-link :to="{name: 'edit-category', params:{id:category.id}}" class="btn btn-sm btn-primary">Edit</router-link>
 
-                        <a @click="deleteSupplier(category.id)" class="btn btn-sm btn-danger">Delete</a>
+                        <a @click="deleteCategory(category.id)" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                       </tr>
                     
@@ -79,7 +79,7 @@ methods:{
       .then(({data}) => (this.categories = data))
       .catch()
     },
-    deleteSupplier(id){
+    deleteCategory(id){
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -90,14 +90,14 @@ methods:{
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-           axios.delete('./api/supplier/'+id)
+           axios.delete('./api/category/'+id)
           .then(() => {
-            this.suppliers = this.suppliers.filter(supplier => {
-              return supplier.id != id
+            this.categories = this.categories.filter(category => {
+              return category.id != id
             })
           })
           .catch(() => {
-            this.$router.push({name: 'supplier'})
+            this.$router.push({name: 'category'})
           })
 
           Swal.fire(
