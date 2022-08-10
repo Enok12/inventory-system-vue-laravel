@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Model\Supplier;
 use Image;
+use DB;
 
 class SupplierController extends Controller
 {
@@ -119,6 +120,14 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $supplier = DB::table('suppliers')->where('id',$id)->first();
+        $photo = $supplier->photo;
+
+        if($photo){
+            unlink($photo);
+            DB::table('suppliers')->where('id',$id)->delete();
+        }else{
+            DB::table('suppliers')->where('id',$id)->delete();
+        }
     }
 }
