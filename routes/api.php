@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\SupplierController;
+use App\Http\Controllers\Api\CategoryController;
+
 
 
 
@@ -23,3 +25,4 @@ Route::group([
 
 Route::apiResource('/employeee', EmployeeController::class);
 Route::apiResource('/supplier', SupplierController::class);
+Route::apiResource('/category', CategoryController::class);
