@@ -28,4 +28,4 @@ Route::group([
 Route::apiResource('/employeee', EmployeeController::class);
 Route::apiResource('/supplier', SupplierController::class);
 Route::apiResource('/category', CategoryController::class);
-Route::apiResource('/product', CategoryController::class);
+Route::apiResource('/product', ProductController::class);
