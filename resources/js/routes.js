@@ -26,7 +26,7 @@ let editproduct = require('./components/product/edit.vue').default;
 
 //EXPENSE COMPONENTS
 let storeexpense = require('./components/expense/create.vue').default;
-let expense = require('./components/expense/create.vue').default;
+let expense = require('./components/expense/index.vue').default;
 let editexpense = require('./components/expense/edit.vue').default;
 
 

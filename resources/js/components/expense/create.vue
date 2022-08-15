@@ -22,7 +22,7 @@
                     <h1 class="h4 text-gray-900 mb-4">Add Expense</h1>
                   </div>
 
-      <form class="user" @submit.prevent="categoryInsert" >
+      <form class="user" @submit.prevent="expenseInsert" >
 
         <div class="form-group">
 
@@ -87,17 +87,18 @@
     data(){
     return {
       form:{
-        category_name: null
+        details: '',
+        amount:''
       },
-      errors:{}
+      errors:{},
     }
   },
 
   methods:{
-  categoryInsert(){
-       axios.post('./api/category',this.form)
+  expenseInsert(){
+       axios.post('./api/expense',this.form)
        .then(() => {
-        this.$router.push({ name: 'category'})
+        this.$router.push({ name: 'expense'})
         Notification.success()
        })
        .catch(error =>this.errors = error.response.data.errors)

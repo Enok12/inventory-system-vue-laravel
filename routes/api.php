@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ExpenseController;
+
 
 
 
@@ -29,3 +31,4 @@ Route::apiResource('/employeee', EmployeeController::class);
 Route::apiResource('/supplier', SupplierController::class);
 Route::apiResource('/category', CategoryController::class);
 Route::apiResource('/product', ProductController::class);
+Route::apiResource('/expense', ExpenseController::class);
