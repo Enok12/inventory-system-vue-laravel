@@ -60,7 +60,8 @@ class ExpenseController extends Controller
      */
     public function show($id)
     {
-        //
+        $expense = DB::table('expenses')->where('id',$id)->first();
+        return response()->json($expense);
     }
 
     /**
@@ -83,7 +84,11 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $data = array();
+       $data['details'] = $request->details;
+       $data['amount'] = $request->amount;
+       
+       DB::table('expenses')->where('id',$id)->update($data);
     }
 
     /**
