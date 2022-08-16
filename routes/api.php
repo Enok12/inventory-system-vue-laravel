@@ -36,3 +36,4 @@ Route::apiResource('/product', ProductController::class);
 Route::apiResource('/expense', ExpenseController::class);
 
 Route::Post('/salary/paid/{id}', [SalaryController::class, 'Paid']);
+Route::get('/salary', [SalaryController::class, 'AllSalary']);
