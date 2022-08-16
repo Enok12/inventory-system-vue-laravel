@@ -8118,13 +8118,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       form: {
         name: '',
         email: '',
-        phone: '',
-        salary: '',
-        address: '',
-        photo: '',
-        newphoto: '',
-        nid: '',
-        joining_date: ''
+        salary_month: '',
+        salary: ''
       },
       errors: {}
     };
@@ -8138,35 +8133,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return _this.form = data;
   })["catch"](console.log('error'));
 }), _defineProperty(_created$data$created, "methods", {
-  onFileSelected: function onFileSelected(event) {
+  salaryPaid: function salaryPaid() {
     var _this2 = this;
 
-    var file = event.target.files[0];
-
-    if (file.size > 1048770) {
-      Notification.image_validation();
-    } else {
-      var reader = new FileReader();
-
-      reader.onload = function (event) {
-        _this2.form.newphoto = event.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    }
-  },
-  employeeUpdate: function employeeUpdate() {
-    var _this3 = this;
-
     var id = this.$route.params.id;
-    axios.patch('/api/employeee/' + id, this.form).then(function () {
-      _this3.$router.push({
-        name: 'employee'
+    axios.post('/api/salary/paid/' + id, this.form).then(function () {
+      //Already paid message development IMPORTANT :- Use "res" as the variable
+      // if(res["data"] == "Salary Already Paid"){
+      //     Notification.warning()
+      // }else{
+      //    this.$router.push({ name: 'given-salary'})
+      //    Notification.success()
+      // }
+      _this2.$router.push({
+        name: 'given-salary'
       });
 
       Notification.success();
     })["catch"](function (error) {
-      return _this3.errors = error.response.data.errors;
+      return _this2.errors = error.response.data.errors;
     });
   }
 }), _created$data$created);
@@ -46505,7 +46490,7 @@ var render = function () {
                       on: {
                         submit: function ($event) {
                           $event.preventDefault()
-                          return _vm.employeeUpdate.apply(null, arguments)
+                          return _vm.salaryPaid.apply(null, arguments)
                         },
                       },
                     },
