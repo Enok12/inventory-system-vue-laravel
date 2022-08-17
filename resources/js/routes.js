@@ -36,8 +36,9 @@ let allsalary = require('./components/salary/index.vue').default;
 let viewsalary = require('./components/salary/view.vue').default;
 let editsalary = require('./components/salary/edit.vue').default;
 
-
-
+//Stock Component
+let stock = require('./components/product/stock.vue').default;
+let editstock = require('./components/product/edit-stock.vue').default;
 
 
 export const routes = [
@@ -79,7 +80,11 @@ export const routes = [
      { path: '/view-salary/:id', component: viewsalary,name:'view-salary' },
      { path: '/edit-salary/:id', component: editsalary,name:'edit-salary' },
 
+     //Stock Module
+     { path: '/stock', component: stock,name:'stock' },
+     { path: '/edit-stock/:id', component: editstock,name:'edit-stock' },
 
+    
 
 
   ]
