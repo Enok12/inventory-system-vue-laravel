@@ -120,11 +120,11 @@
     </div>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="forms.html">
+    <router-link class="nav-link" to="/stock">
       <i class="fab fa-fw fa-wpforms"></i>
-      <span>Forms</span>
+      <span>Stock</span>
     </a>
-  </li>
+  </li> 
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
       aria-controls="collapseTable">
