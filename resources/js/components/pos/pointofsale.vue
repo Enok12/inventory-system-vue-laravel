@@ -17,13 +17,79 @@
             <div class="col-xl-5 col-lg-5">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Monthly Recap Report</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Expense Insert</h6>
+                  <a class="btn btn-sm btn-info" href="">Add Customer</a>
                 </div>
-                <div class="card-body">
-                  <div class="chart-area">
-                    asdaasdasdasdasdas
-                  </div>
+               
+
+
+                <div class="table-responsive" style="font-size:12px;">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><a href="#">RA0449</a></td>
+                        <td>Udin Wayang</td>
+                        <td>Nasi Padang</td>
+                        <td><span class="badge badge-success">Delivered</span></td>
+                        <td><a href="#" class="btn btn-sm btn-primary">X</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+                <div class="card-footer">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-tems-center">Total Quantity:
+                            <strong>67</strong>
+                        </li>
+                         <li class="list-group-item d-flex justify-content-between align-tems-center">Sub Total:
+                            <strong>$ 23423</strong>
+                        </li>
+                         <li class="list-group-item d-flex justify-content-between align-tems-center">VAT :
+                            <strong>67</strong>
+                        </li>
+                         <li class="list-group-item d-flex justify-content-between align-tems-center">Total Amount:
+                            <strong>632427</strong>
+                        </li>
+                    </ul>
+                    <br>
+
+                    <form>
+                        <label for="">Customer Name</label>
+                        <select class="form-control" v-model="customer_id">
+                            <option value="">Shemalka</option>
+                        </select>
+
+                        <label for="">Pay</label>
+                        <input type="text" class="form-control" required="" v-model="pay">
+
+                        <label for="">Due</label>
+                        <input type="text" class="form-control" required="" v-model="due">
+
+                        <label for="">Pay by</label>
+                        <select class="form-control" v-model="customer_id">
+                            <option value="Cash">Cash</option>
+                            <option value="Chequeu">Chequeu</option>
+                            <option value="Gift_Card">Gift Card</option>
+                        </select>
+
+                        <br>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+
+                </div>
+
+
+
+
               </div>
             </div>
 
