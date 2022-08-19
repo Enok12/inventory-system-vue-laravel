@@ -17,7 +17,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customer = DB::table('customers')->orrderBy('id','DESC')->get();
+        $customer = DB::table('customers')->orderBy('id','DESC')->get();
         return response()->json($customer);
     }
 
@@ -64,8 +64,8 @@ class CustomerController extends Controller
             $customer->email = $request->email;
             $customer->phone = $request->phone;
             $customer->address = $request->address;
-            $employee->photo =  $img_url;
-            $employee->save();
+            $customer->photo =  $img_url;
+            $customer->save();
          }else{
             $customer = new Customer();
 
@@ -120,6 +120,14 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = DB::table('customers')->where('id',$id)->first();
+        $photo = $customer->photo;
+
+        if($photo){
+            unlink($photo);
+            DB::table('customers')->where('id',$id)->delete();
+        }else{
+            DB::table('customers')->where('id',$id)->delete();
+        }
     }
 }
