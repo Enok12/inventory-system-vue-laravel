@@ -37,6 +37,11 @@
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></router-link>
   </li>
+  <li class="nav-item bg-info">
+    <router-link class="nav-link" to="/home">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>POS</span></router-link>
+  </li>
   <hr class="sidebar-divider">
   <div class="sidebar-heading">
     Features
@@ -126,16 +131,28 @@
     </a>
   </li> 
   <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap7"
+      aria-expanded="true" aria-controls="collapseBootstrap7">
+      <i class="far fa-fw fa-window-maximize"></i>
+      <span>Customers</span>
+    </a>
+    <div id="collapseBootstrap7" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <router-link to="/store-customer" class="collapse-item" >Add Customer</router-link>
+        <router-link to="/customer" class="collapse-item" >All Customer</router-link>
+      </div>
+    </div>
+  </li>
+  <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
       aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
-      <span>Tables</span>
+      <span>Reports</span>
     </a>
     <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Tables</h6>
-        <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-        <a class="collapse-item" href="datatables.html">DataTables</a>
+        <a class="collapse-item" href="simple-tables.html">Report One</a>
+        <a class="collapse-item" href="datatables.html">Report Two</a>
       </div>
     </div>
   </li>
