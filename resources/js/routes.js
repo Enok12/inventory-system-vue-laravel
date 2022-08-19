@@ -90,7 +90,7 @@ export const routes = [
      { path: '/edit-stock/:id', component: editstock,name:'edit-stock' },
 
      //Customer Module
-     { path: '/store-customer', component: storeecustomer,name:'store-customer' },
+     { path: '/store-customer', component: storecustomer,name:'store-customer' },
      { path: '/customer', component: customer,name:'customer' },
      { path: '/edit-customer/:id', component: editcustomer,name:'edit-customer' },
 

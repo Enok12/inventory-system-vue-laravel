@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
+use App\Models\Model\Customer;
+use Image;
 
 class CustomerController extends Controller
 {
@@ -14,7 +17,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = DB::table('customers')->orrderBy('id','DESC')->get();
+        return response()->json($customer);
     }
 
     /**
@@ -35,7 +39,43 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedata = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+       
+        if($request->photo){
+            $position = strpos($request->photo,';');
+            $sub = substr($request->photo,0,$position);
+            $exi = explode('/',$sub)[1];
+
+            $name = time().".".$exi;
+            $image = Image::make($request->photo)->resize(240,200);
+            $upload_path = 'backend/customer/';
+            $img_url = $upload_path.$name;
+            $image->save($img_url);
+
+            $customer = new Customer;
+
+            $customer->name = $request->name;
+            $customer->email = $request->email;
+            $customer->phone = $request->phone;
+            $customer->address = $request->address;
+            $employee->photo =  $img_url;
+            $employee->save();
+         }else{
+            $customer = new Customer();
+
+            $customer->name = $request->name;
+            $customer->email = $request->email;
+            $customer->phone = $request->phone;
+            $customer->address = $request->address;
+            $customer->save();
+         }
+
     }
 
     /**
