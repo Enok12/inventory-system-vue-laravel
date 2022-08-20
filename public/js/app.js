@@ -7931,13 +7931,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }, _defineProperty(_created$created$data, "created", function created() {
   this.allProducts();
   this.allCategories();
+  this.allCustomers();
 }), _defineProperty(_created$created$data, "data", function data() {
   return {
     products: [],
     categories: '',
     getproducts: [],
     searchTerm: '',
-    searchTerm2: ''
+    searchTerm2: '',
+    customers: '',
+    error: ''
   };
 }), _defineProperty(_created$created$data, "computed", {
   //Search
@@ -7978,6 +7981,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     axios.get('./api/getting/product/' + id).then(function (_ref3) {
       var data = _ref3.data;
       return _this5.getproducts = data;
+    })["catch"]();
+  },
+  allCustomers: function allCustomers() {
+    var _this6 = this;
+
+    axios.get('./api/customer').then(function (_ref4) {
+      var data = _ref4.data;
+      return _this6.customers = data;
     })["catch"]();
   }
 }), _created$created$data);
@@ -48264,11 +48275,14 @@ var render = function () {
                         },
                       },
                     },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Shemalka"),
-                      ]),
-                    ]
+                    _vm._l(_vm.customers, function (customer) {
+                      return _c(
+                        "option",
+                        { key: customer.id, attrs: { value: "" } },
+                        [_vm._v(_vm._s(customer.name))]
+                      )
+                    }),
+                    0
                   ),
                   _vm._v(" "),
                   _c("label", { attrs: { for: "" } }, [_vm._v("Pay")]),
