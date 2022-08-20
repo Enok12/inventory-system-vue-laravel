@@ -46,6 +46,17 @@ class Notification{
          }).show();
     }
 
+    cart_success(){
+        new Noty({
+           type:'success',
+           layout:'topRight',
+            text: 'Successfully Added to Cart',
+            timeout:1000,
+        }).show();
+    }
+
+    
+
    
 
   

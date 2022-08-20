@@ -122,7 +122,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="product in filtersearch" :key="product.id">
-                                        <a href="#">
+                                        <button class="btn btn-sm" @click.prevent = "AddtoCart(product.id)">
                                         <div class="card" style="width: 8.5rem;">
                                             <img class="card-img-top" :src="product.image" id="em_photo">
                                                 <div class="card-body">
@@ -130,7 +130,7 @@
                                                     <span class="badge badge-success" v-if="product.product_quantity >= 1">{{ product.product_quantity }} Available </span>
                                                     <span v-else class="badge badge-danger">Stock Out</span>
                                                 </div>
-                                        </div></a>
+                                        </div></button>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="getproducts in getfiltersearch" :key="getproducts.id">
-                                        <a href="#">
+                                        <button class="btn btn-sm">
                                         <div class="card" style="width: 8.5rem;">
                                             <img class="card-img-top" :src="getproducts.image" id="em_photo">
                                                 <div class="card-body">
@@ -154,7 +154,7 @@
                                                     <span class="badge badge-success" v-if="getproducts.product_quantity >= 1">{{ getproducts.product_quantity }} Available </span>
                                                     <span v-else class="badge badge-danger">Stock Out</span>
                                                 </div>
-                                        </div></a>
+                                        </div></button>
                                     </div>
                                 </div>
                                 </div> 
@@ -238,6 +238,16 @@ methods:{
       .then(({data}) => (this.customers = data))
       .catch()
     },
+
+    //Cart methods
+    AddtoCart(id){
+       axios.get('./api/addToCart/'+id)
+      .then(() => {
+        Notification.cart_success();
+      })
+      .catch()
+    }
+    //End Cart Methods
 }
 
 }

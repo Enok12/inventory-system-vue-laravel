@@ -7,7 +7,9 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\CustomerController;
-use App\Http\Controllers\Api\PosController;;
+use App\Http\Controllers\Api\PosController;
+use App\Http\Controllers\Api\CartController;
+
 
 
 
@@ -50,4 +52,8 @@ Route::post('/salary/update/{id}', [SalaryController::class, 'UpdateSalary']);
 Route::post('/stock/update/{id}', [ProductController::class, 'StockUpdate']);
 
 Route::get('/getting/product/{id}', [PosController::class, 'GetProduct']);
+
+//Add to Cart
+Route::get('/addToCart/{id}', [CartController::class, 'AddtoCart']);
+
 
