@@ -35,12 +35,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">X</a></td>
+                      <tr v-for="cart in carts" :key="cart.id">
+                        <td><a href="#">{{ cart.pro_name }}</a></td>
+                        <td>
+                          <button class="btn btn-sm btn-success">+</button>
+                          <input type="text" readonly :value="cart.pro_quantity" style="width:15px;">
+                          <button class="btn btn-sm btn-danger">-</button>
+                          </td>
+                        <td>{{ cart.product_price }}</td>
+                        <td>{{ cart.subtotal }}</td>
+                        <td><a @click="removeitem(cart.id)" class="btn btn-sm btn-primary">X</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -190,6 +194,12 @@ created(){
   this.allProducts();
   this.allCategories();
   this.allCustomers();
+  this.cartProduct();
+
+  //Used to update the table while adding products
+  Reload.$on('AfterAdd',()=>{
+    this.cartProduct()
+  });
 },
 
 data(){
@@ -200,7 +210,8 @@ data(){
     searchTerm:'',
     searchTerm2:'',
     customers:'',
-    error:''
+    error:'',
+    carts:[]
   }
 },
 
@@ -243,7 +254,25 @@ methods:{
     AddtoCart(id){
        axios.get('./api/addToCart/'+id)
       .then(() => {
+        Reload.$emit('AfterAdd');
         Notification.cart_success();
+      })
+      .catch()
+    },
+
+  //Dsiplay on table
+    cartProduct(){
+      axios.get('./api/cart/product/')
+      .then(({data}) => (this.carts = data))
+      .catch()
+    },
+
+    //Remove Cart Item
+    removeitem(id){
+     axios.get('./api/remove/cart/'+id)
+      .then(() => {
+        Reload.$emit('AfterAdd');
+        Notification.cart_delete();
       })
       .catch()
     }

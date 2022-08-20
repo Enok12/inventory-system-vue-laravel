@@ -55,5 +55,9 @@ Route::get('/getting/product/{id}', [PosController::class, 'GetProduct']);
 
 //Add to Cart
 Route::get('/addToCart/{id}', [CartController::class, 'AddtoCart']);
+Route::get('/cart/product', [CartController::class, 'CartProduct']);
+Route::get('/remove/cart/{id}', [CartController::class, 'removeCart']);
+
+
 
 

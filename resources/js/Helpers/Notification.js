@@ -55,6 +55,15 @@ class Notification{
         }).show();
     }
 
+    cart_delete(){
+        new Noty({
+           type:'success',
+           layout:'topRight',
+            text: 'Successfully Removed from Cart',
+            timeout:1000,
+        }).show();
+    }
+
     
 
    
