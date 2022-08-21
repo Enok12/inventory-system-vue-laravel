@@ -48323,7 +48323,7 @@ var render = function () {
                               ),
                               _vm._v(" "),
                               _c("input", {
-                                staticStyle: { width: "15px" },
+                                staticStyle: { width: "25px" },
                                 attrs: { type: "text", readonly: "" },
                                 domProps: { value: cart.pro_quantity },
                               }),

@@ -39,7 +39,7 @@
                         <td><a href="#">{{ cart.pro_name }}</a></td>
                         <td>
                           <button class="btn btn-sm btn-success">+</button>
-                          <input type="text" readonly :value="cart.pro_quantity" style="width:15px;">
+                          <input type="text" readonly :value="cart.pro_quantity" style="width:25px;">
                           <button class="btn btn-sm btn-danger">-</button>
                           </td>
                         <td>{{ cart.product_price }}</td>
