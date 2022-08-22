@@ -63,6 +63,9 @@ Route::get('/decrement/{id}', [CartController::class, 'Decrement']);
 //VAT Route
 Route::get('/vats', [CartController::class, 'Vats']);
 
+Route::post('/orderdone', [PosController::class, 'orderdone']);
+
+
 
 
 
