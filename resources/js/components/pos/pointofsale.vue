@@ -38,9 +38,10 @@
                       <tr v-for="cart in carts" :key="cart.id">
                         <td><a href="#">{{ cart.pro_name }}</a></td>
                         <td>
-                          <button class="btn btn-sm btn-success">+</button>
+                          <button class="btn btn-sm btn-success" @click.prevent="increment(cart.id)">+</button>
                           <input type="text" readonly :value="cart.pro_quantity" style="width:25px;">
-                          <button class="btn btn-sm btn-danger">-</button>
+                          <button class="btn btn-sm btn-danger" v-if="cart.pro_quantity >= 2" @click.prevent="decrement(cart.id)">-</button>
+                          <button class="btn btn-sm btn-danger" v-else disabled>-</button>
                           </td>
                         <td>{{ cart.product_price }}</td>
                         <td>{{ cart.subtotal }}</td>
@@ -150,7 +151,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="getproducts in getfiltersearch" :key="getproducts.id">
-                                        <button class="btn btn-sm">
+                                        <button class="btn btn-sm" @click.prevent = "AddtoCart(getproducts.id)">
                                         <div class="card" style="width: 8.5rem;">
                                             <img class="card-img-top" :src="getproducts.image" id="em_photo">
                                                 <div class="card-body">
@@ -275,6 +276,18 @@ methods:{
         Notification.cart_delete();
       })
       .catch()
+    },
+    increment(id){
+       axios.get('./api/increment/'+id)
+      .then(() => {
+        Reload.$emit('AfterAdd');
+      })
+    },
+    decrement(id){
+      axios.get('./api/decrement/'+id)
+      .then(() => {
+        Reload.$emit('AfterAdd');
+      })
     }
     //End Cart Methods
 }
