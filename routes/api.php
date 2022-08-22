@@ -60,6 +60,10 @@ Route::get('/remove/cart/{id}', [CartController::class, 'removeCart']);
 Route::get('/increment/{id}', [CartController::class, 'Increment']);
 Route::get('/decrement/{id}', [CartController::class, 'Decrement']);
 
+//VAT Route
+Route::get('/vats', [CartController::class, 'Vats']);
+
+
 
 
 

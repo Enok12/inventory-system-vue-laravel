@@ -60,4 +60,9 @@ class CartController extends Controller
         DB::table('pos')->where('id',$id)->update(['subtotal' => $subtotal]);
         return response("Done");
     }
+
+    public function Vats(){
+        $vat = DB::table('extra')->first();
+        return response()->json($vat);
+    }
 }

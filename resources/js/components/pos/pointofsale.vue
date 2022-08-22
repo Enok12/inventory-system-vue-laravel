@@ -53,16 +53,16 @@
                 <div class="card-footer">
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-tems-center">Total Quantity:
-                            <strong>67</strong>
+                            <strong>{{ qty }}</strong>
                         </li>
                          <li class="list-group-item d-flex justify-content-between align-tems-center">Sub Total:
-                            <strong>$ 23423</strong>
+                            <strong>Rs {{subtotal}}</strong>
                         </li>
                          <li class="list-group-item d-flex justify-content-between align-tems-center">VAT :
-                            <strong>67</strong>
+                            <strong>{{ vats.vat }} %</strong>
                         </li>
                          <li class="list-group-item d-flex justify-content-between align-tems-center">Total Amount:
-                            <strong>632427</strong>
+                            <strong>Rs {{(subtotal * (vats.vat/100)) + subtotal}}</strong>
                         </li>
                     </ul>
                     <br>
@@ -196,6 +196,7 @@ created(){
   this.allCategories();
   this.allCustomers();
   this.cartProduct();
+   this.vat();
 
   //Used to update the table while adding products
   Reload.$on('AfterAdd',()=>{
@@ -212,7 +213,8 @@ data(){
     searchTerm2:'',
     customers:'',
     error:'',
-    carts:[]
+    carts:[],
+    vats:''
   }
 },
 
@@ -227,6 +229,24 @@ computed:{
     return this.getproducts.filter(getproduct => {
       return getproduct.product_name.match(this.searchTerm2)
     })
+  },
+
+  //Total Quantity
+  qty(){
+     let sum = 0;
+     for(let i=0; i<this.carts.length;i++){
+      sum += (parseFloat(this.carts[i].pro_quantity))
+     }
+     return sum;
+  },
+
+  //Sub Total
+  subtotal(){
+     let sum = 0;
+     for(let i=0; i<this.carts.length;i++){
+      sum += (parseFloat(this.carts[i].pro_quantity * this.carts[i].product_price))
+     }
+     return sum;
   },
 },
 methods:{
@@ -288,6 +308,12 @@ methods:{
       .then(() => {
         Reload.$emit('AfterAdd');
       })
+    },
+
+    vat(){
+      axios.get('./api/vats/')
+      .then(({data}) => (this.vats = data))
+      .catch()
     }
     //End Cart Methods
 }

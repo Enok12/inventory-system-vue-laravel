@@ -7939,7 +7939,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   this.allProducts();
   this.allCategories();
   this.allCustomers();
-  this.cartProduct(); //Used to update the table while adding products
+  this.cartProduct();
+  this.vat(); //Used to update the table while adding products
 
   Reload.$on('AfterAdd', function () {
     _this.cartProduct();
@@ -7953,7 +7954,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     searchTerm2: '',
     customers: '',
     error: '',
-    carts: []
+    carts: [],
+    vats: ''
   };
 }), _defineProperty(_created$created$data, "computed", {
   //Search
@@ -7970,6 +7972,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return this.getproducts.filter(function (getproduct) {
       return getproduct.product_name.match(_this3.searchTerm2);
     });
+  },
+  //Total Quantity
+  qty: function qty() {
+    var sum = 0;
+
+    for (var i = 0; i < this.carts.length; i++) {
+      sum += parseFloat(this.carts[i].pro_quantity);
+    }
+
+    return sum;
+  },
+  //Sub Total
+  subtotal: function subtotal() {
+    var sum = 0;
+
+    for (var i = 0; i < this.carts.length; i++) {
+      sum += parseFloat(this.carts[i].pro_quantity * this.carts[i].product_price);
+    }
+
+    return sum;
   }
 }), _defineProperty(_created$created$data, "methods", {
   allProducts: function allProducts() {
@@ -8036,6 +8058,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     axios.get('./api/decrement/' + id).then(function () {
       Reload.$emit('AfterAdd');
     });
+  },
+  vat: function vat() {
+    var _this9 = this;
+
+    axios.get('./api/vats/').then(function (_ref6) {
+      var data = _ref6.data;
+      return _this9.vats = data;
+    })["catch"]();
   } //End Cart Methods
 
 }), _created$created$data);
@@ -48399,7 +48429,62 @@ var render = function () {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "card-footer" }, [
-                _vm._m(3),
+                _c("ul", { staticClass: "list-group" }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-tems-center",
+                    },
+                    [
+                      _vm._v("Total Quantity:\n                            "),
+                      _c("strong", [_vm._v(_vm._s(_vm.qty))]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-tems-center",
+                    },
+                    [
+                      _vm._v("Sub Total:\n                            "),
+                      _c("strong", [_vm._v("Rs " + _vm._s(_vm.subtotal))]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-tems-center",
+                    },
+                    [
+                      _vm._v("VAT :\n                            "),
+                      _c("strong", [_vm._v(_vm._s(_vm.vats.vat) + " %")]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex justify-content-between align-tems-center",
+                    },
+                    [
+                      _vm._v("Total Amount:\n                            "),
+                      _c("strong", [
+                        _vm._v(
+                          "Rs " +
+                            _vm._s(
+                              _vm.subtotal * (_vm.vats.vat / 100) + _vm.subtotal
+                            )
+                        ),
+                      ]),
+                    ]
+                  ),
+                ]),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
@@ -48556,7 +48641,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "col-xl-7 col-lg-7" }, [
             _c("div", { staticClass: "card mb-4" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "ul",
@@ -48565,7 +48650,7 @@ var render = function () {
                   attrs: { id: "myTab", role: "tablist" },
                 },
                 [
-                  _vm._m(5),
+                  _vm._m(4),
                   _vm._v(" "),
                   _vm._l(_vm.categories, function (category) {
                     return _c(
@@ -48943,60 +49028,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Action")]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "list-group" }, [
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-tems-center",
-        },
-        [
-          _vm._v("Total Quantity:\n                            "),
-          _c("strong", [_vm._v("67")]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-tems-center",
-        },
-        [
-          _vm._v("Sub Total:\n                            "),
-          _c("strong", [_vm._v("$ 23423")]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-tems-center",
-        },
-        [
-          _vm._v("VAT :\n                            "),
-          _c("strong", [_vm._v("67")]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass:
-            "list-group-item d-flex justify-content-between align-tems-center",
-        },
-        [
-          _vm._v("Total Amount:\n                            "),
-          _c("strong", [_vm._v("632427")]),
-        ]
-      ),
     ])
   },
   function () {
