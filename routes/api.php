@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\PosController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
+
 
 
 
@@ -64,6 +66,11 @@ Route::get('/decrement/{id}', [CartController::class, 'Decrement']);
 Route::get('/vats', [CartController::class, 'Vats']);
 
 Route::post('/orderdone', [PosController::class, 'orderdone']);
+
+//Order Route
+Route::get('/order', [OrderController::class, 'TodayOrder']);
+
+
 
 
 
