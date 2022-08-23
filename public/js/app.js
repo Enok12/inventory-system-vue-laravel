@@ -8085,7 +8085,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       total: total
     };
     axios.post('./api/orderdone', data).then(function () {
-      Notification.success(); //this.$router.push({name:home})
+      Notification.success();
     });
   }
 }), _created$created$data);

@@ -22,6 +22,8 @@ class PosController extends Controller
             'payby' => 'required',
         ]);
 
+        
+
         $data = array();
         $data['customer_id'] = $request->customer_id;
         $data['qty'] = $request->qty;
@@ -42,12 +44,18 @@ class PosController extends Controller
 
         foreach ($contents as $content) {
             $orderdata['order_id'] = $order_id; 
-            $orderdata['product_id'] = $contents->pro_id; 
-            $orderdata['pro_quantity'] = $contents->pro_quantity; 
-            $orderdata['product_price'] = $contents->product_price; 
-            $orderdata['subtotal'] = $contents->subtotal;
+            $orderdata['product_id'] = $content->pro_id; 
+            $orderdata['pro_quantity'] = $content->pro_quantity; 
+            $orderdata['product_price'] = $content->product_price; 
+            $orderdata['subtotal'] = $content->subtotal;
             DB::table('order_details')->insert($orderdata); 
+
+            DB::table('products')->where('id',$content->pro_id)
+            ->update(['product_quantity'=> DB::raw('product_quantity -'.$content->pro_quantity)]);
         }
+        DB::table('pos')->delete();
+        return response("Done");
+
     }
 
     
