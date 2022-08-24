@@ -102,6 +102,12 @@ class PosController extends Controller
         return response()->json($expense);
     }
 
+    public function Stockout(){
+        $product = DB::table('products')->where('product_quantity','<','1')->get();
+
+        return response()->json($product);
+    }
+
     
         
 }

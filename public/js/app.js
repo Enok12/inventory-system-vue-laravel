@@ -7511,6 +7511,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     //Checks whether user has logged in when page is loaded
@@ -7525,7 +7569,8 @@ __webpack_require__.r(__webpack_exports__);
       todaysell: '',
       income: '',
       expense: '',
-      due: ''
+      due: '',
+      products: ''
     };
   },
   mounted: function mounted() {
@@ -7533,6 +7578,7 @@ __webpack_require__.r(__webpack_exports__);
     this.TodayIncome();
     this.TodayDue();
     this.TodayExpense();
+    this.Stockout();
   },
   methods: {
     TodaySell: function TodaySell() {
@@ -7573,6 +7619,16 @@ __webpack_require__.r(__webpack_exports__);
         return _this4.expense = data;
       })["catch"](function (error) {
         return _this4.errors = error.response.data.errors;
+      });
+    },
+    Stockout: function Stockout() {
+      var _this5 = this;
+
+      axios.get('./api/today/stockout/').then(function (_ref5) {
+        var data = _ref5.data;
+        return _this5.products = data;
+      })["catch"](function (error) {
+        return _this5.errors = error.response.data.errors;
       });
     }
   }
@@ -48279,6 +48335,76 @@ var render = function () {
         ]),
       ]),
     ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-12 mb-4" }, [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(9),
+        _vm._v(" "),
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table align-items-center table-flush" }, [
+            _vm._m(10),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.products, function (product) {
+                return _c("tr", { key: product.id }, [
+                  _c("td", [_vm._v(_vm._s(product.product_name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.product_code))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("img", {
+                      attrs: { src: product.image, alt: "", id: "em_photo" },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.category_name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.buying_price))]),
+                  _vm._v(" "),
+                  product.product_quantity >= 1
+                    ? _c("td", [
+                        _c("span", { staticClass: "badge badge-success" }, [
+                          _vm._v("Available"),
+                        ]),
+                      ])
+                    : _c("td", [
+                        _c("span", { staticClass: "badge badge-danger" }, [
+                          _vm._v("Stock Out"),
+                        ]),
+                      ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.product_quantity))]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-sm btn-primary",
+                          attrs: {
+                            to: {
+                              name: "edit-stock",
+                              params: { id: product.id },
+                            },
+                          },
+                        },
+                        [_vm._v("Edit")]
+                      ),
+                    ],
+                    1
+                  ),
+                ])
+              }),
+              0
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer" }),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -48396,6 +48522,47 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-auto" }, [
       _c("i", { staticClass: "fas fa-comments fa-2x text-warning" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-header py-3 d-flex flex-row align-items-center justify-content-between",
+      },
+      [
+        _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
+          _vm._v("Stock Out"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Code")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Photo")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Category")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Buying Price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Quantity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")]),
+      ]),
     ])
   },
 ]
