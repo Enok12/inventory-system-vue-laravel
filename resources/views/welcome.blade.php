@@ -152,7 +152,7 @@
     <div id="collapseBootstrap8" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <router-link to="/order" class="collapse-item" >Today Order</router-link>
-        <router-link to="/" class="collapse-item" >Search</router-link>
+        <router-link to="/searchorder" class="collapse-item" >Search</router-link>
       </div>
     </div>
   </li>
