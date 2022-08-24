@@ -7,6 +7,12 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\PosController;
+use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
+
+
+
 
 
 
@@ -46,3 +52,48 @@ Route::get('/edit/salary/{id}', [SalaryController::class, 'EditSalary']);
 Route::post('/salary/update/{id}', [SalaryController::class, 'UpdateSalary']);
 
 Route::post('/stock/update/{id}', [ProductController::class, 'StockUpdate']);
+
+Route::get('/getting/product/{id}', [PosController::class, 'GetProduct']);
+
+//Add to Cart
+Route::get('/addToCart/{id}', [CartController::class, 'AddtoCart']);
+Route::get('/cart/product', [CartController::class, 'CartProduct']);
+Route::get('/remove/cart/{id}', [CartController::class, 'removeCart']);
+Route::get('/increment/{id}', [CartController::class, 'Increment']);
+Route::get('/decrement/{id}', [CartController::class, 'Decrement']);
+
+//VAT Route
+Route::get('/vats', [CartController::class, 'Vats']);
+
+Route::post('/orderdone', [PosController::class, 'orderdone']);
+
+//Order Route
+Route::get('/order', [OrderController::class, 'TodayOrder']);
+Route::get('/order/details/{id}', [OrderController::class, 'OrderDetails']);
+Route::get('/order/orderdetails/{id}', [OrderController::class, 'OrderDetailsAll']);
+Route::post('/search/order/', [PosController::class, 'SearchOrderDate']);
+
+//Admin Dashboard
+Route::get('/today/sell', [PosController::class, 'TodaySell']);
+Route::get('/today/income', [PosController::class, 'TodayIncome']);
+Route::get('/today/due', [PosController::class, 'TodayDue']);
+Route::get('/today/expense', [PosController::class, 'TodayExpense']);
+Route::get('/today/stockout', [PosController::class, 'Stockout']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

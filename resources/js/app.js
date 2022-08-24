@@ -35,6 +35,8 @@ const Toast = Swal.mixin({
 
 window.Toast = Toast;
 
+window.Reload = new Vue();
+
 
 const router = new VueRouter({
     routes, // short for `routes: routes`
